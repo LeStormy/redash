@@ -41,13 +41,11 @@ services:
     environment:
       <<: *redash-environment
   worker:
-    <<: *redash-service
-    command: dev_worker
-    depends_on:
-      - server
-    environment:
-      <<: *redash-environment
-      PYTHONUNBUFFERED: 0
+    <<: *redash-service 
+    command: worker
+    environment: 
+      QUEUES: “periodic emails default”
+      WORKERS_COUNT: 1
   redis:
     image: redis:3-alpine
     restart: unless-stopped
