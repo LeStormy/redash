@@ -48,6 +48,8 @@ services:
     environment:
       <<: *redash-environment
       PYTHONUNBUFFERED: 0
+      QUEUES: "periodic emails default"
+      WORKERS_COUNT: 1
   redis:
     image: redis:3-alpine
     restart: unless-stopped
